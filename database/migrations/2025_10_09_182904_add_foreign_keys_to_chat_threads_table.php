@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('chat_threads', function (Blueprint $table) {
+            $table->foreign(['booking_id'], 'chat_threads_ibfk_1')->references(['id'])->on('bookings')->onUpdate('no action')->onDelete('no action');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('chat_threads', function (Blueprint $table) {
+            $table->dropForeign('chat_threads_ibfk_1');
+        });
+    }
+};
